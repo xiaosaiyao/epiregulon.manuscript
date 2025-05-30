@@ -16,6 +16,7 @@ PeakMatrix <- mae[["PeakMatrix"]]
 GeneExpressionMatrix <- mae[["GeneExpressionMatrix"]]
 rownames(GeneExpressionMatrix) <- rowData(GeneExpressionMatrix)$name
 
+
 # dimensional reduction matrix
 reducedDimMatrix <- reducedDim(mae[['TileMatrix500']], "LSI_ATAC")
 reducedDim(GeneExpressionMatrix, "UMAP_Combined") <- reducedDim(mae[['TileMatrix500']], "UMAP_Combined")
@@ -159,7 +160,8 @@ hash_matrix["GATA6", GeneExpressionMatrix$hash_assignment %in%  c("HTO10_GATA6_U
 
 
 # plot TF activity, gex in UMAP
-pdf("reprogramseq/preprocessing/OUTPUT/reprogram.seq.gex.activty.umap.pdf", width=10, height = 6)
+
+pdf("reprogramseq/preprocessing/OUTPUT/reprogram.seq.gex.activty.umap.pdf", width=12.5, height = 7.5)
 options(ggrastr.default.dpi=300)
 plotActivityDim(sce = GeneExpressionMatrix,
                 activity_matrix = score.combine,
@@ -168,7 +170,7 @@ plotActivityDim(sce = GeneExpressionMatrix,
                 label = "Clusters",
                 point_size = 0.1,
                 colors = c("darkblue","yellow"),
-                limit = c(0,0.1),
+                limit = c(0,0.15),
                 ncol = 3,
                 rasterise=TRUE)
 
@@ -331,14 +333,14 @@ chromvar_z <- assay(NEPCMatrix, "z")
 
 
 # plot chromVar
-pdf("reprogramseq/preprocessing/OUTPUT/reprogram.seq.chromvar.umap.pdf", width = 12, height = 8)
+pdf("reprogramseq/preprocessing/OUTPUT/reprogram.seq.chromvar.umap.pdf", width = 12.5, height = 7.5)
 options(ggrastr.default.dpi=300)
 plotActivityDim(sce = GeneExpressionMatrix,
                 activity_matrix = assay(NEPCMatrix,"z"),
                 tf = rownames(NEPCMatrix),
                 dimtype = "UMAP_Combined",
                 label = "Clusters",
-                point_size = 0.5,
+                point_size = 0.1,
                 ncol = 3,
                 nrow=2,
                 colors = c("grey","red"),
@@ -390,14 +392,14 @@ reducedDim(TF_bindingMatrix, "UMAP_Combined") <- reducedDim(mae[['TileMatrix500'
 
 
 # plot chromVar
-pdf("reprogramseq/preprocessing/OUTPUT/reprogram.seq.chromvar.TFbinding.umap.pdf", width = 12, height = 8)
+pdf("reprogramseq/preprocessing/OUTPUT/reprogram.seq.chromvar.TFbinding.umap.pdf", width = 12.5, height = 7.5)
 options(ggrastr.default.dpi=300)
 plotActivityDim(sce = GeneExpressionMatrix,
                 activity_matrix = assay(TF_bindingMatrix,"z"),
                 tf = c("NKX2-1","GATA6","FOXA1","FOXA2", "AR"),
                 dimtype = "UMAP_Combined",
                 label = "Clusters",
-                point_size = 0.5,
+                point_size = 0.1,
                 ncol = 3,
                 nrow=2,
                 colors = c("grey","red"),
