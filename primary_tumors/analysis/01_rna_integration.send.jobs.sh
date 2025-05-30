@@ -1,1 +1,5 @@
-/gstore/project/lineage/kidney/DS000016526_ccRCC/analysis/01_rna_integration.send.jobs.sh
+for i in 1
+do
+    sbatch 01_rna_integration.sh $i
+done
+
